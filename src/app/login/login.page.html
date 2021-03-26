@@ -1,0 +1,42 @@
+<ion-content>
+    <figure text-center padding>
+        <img src="../../assets/img/logo.png" alt="Icono Platzi Music">
+    </figure>
+    <form [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm.value)">
+        <ion-item>
+            <ion-label>Email</ion-label>
+            <ion-input formControlName="email"></ion-input>
+            <div class="validation-error">
+                <ng-container *ngFor="let validation of validation_messages.email">
+                    <div *ngIf="loginForm.get('email').hasError(validation.type)
+                    && (loginForm.get('email').dirty ||
+                    loginForm.get('email').touched)">
+                        {{validation.message}}
+                    </div>
+
+                </ng-container>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label>Password</ion-label>
+            <ion-input type="password" formControlName="password"></ion-input>
+            <div class="validation-error">
+                <ng-container *ngFor="let validation of validation_messages.password">
+                    <div *ngIf="loginForm.get('password').hasError(validation.type)
+                && (loginForm.get('password').dirty ||
+                loginForm.get('password').touched)">
+                        {{validation.message}}
+                    </div>
+
+                </ng-container>
+            </div>
+        </ion-item>
+        <ion-button expand="full" shape="round" color="success" type="submit" [disabled]="loginForm.invalid">Login</ion-button>
+        {{errorMessage}}
+    </form>
+
+
+</ion-content>
+<ion-footer class="ion-text-center">
+    <ion-button (click)="goToRegister()" expand="full" shape="round" fill="outline" color="success">Click para registrar</ion-button>
+</ion-footer>
